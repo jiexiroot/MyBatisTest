@@ -16,7 +16,7 @@ public class TestClass {
     UserDao userDAO=(UserDao) context.getBean("userDao");
     Scanner inputScanner=new Scanner(System.in);
     @org.junit.Test
-   public void login(){
+    public void login(){
         System.out.println("请输入用户名：");
         String loginId=inputScanner.next();
         System.out.println("请输入密码：");
