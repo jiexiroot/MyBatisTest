@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="com.mybatisTest.mapper.UsersMapper">
+    <!-- 配置映射的SQL语句 -->
+    <select id="doLogin" parameterType="com.mybatisTest.pojo.User" resultType="Integer">
+	   		select count(*) from users where loginId=#{loginId} and loginPwd=#{loginPwd}
+   </select>
+    <select id="doRegister" statementType="CALLABLE" parameterType="java.util.HashMap" >
+          {call sp_register(
+             #{user.loginId,mode=IN,jdbcType=VARCHAR},
+             #{user.loginPwd,mode=IN,jdbcType=VARCHAR},
+             #{user.name,mode=IN,jdbcType=VARCHAR},
+             #{user.address,mode=IN,jdbcType=VARCHAR},
+             #{user.phone,mode=IN,jdbcType=VARCHAR},
+             #{user.mail,mode=IN,jdbcType=VARCHAR},
+             #{flag,mode=OUT,jdbcType=INTEGER})}
+    </select>
+</mapper>
