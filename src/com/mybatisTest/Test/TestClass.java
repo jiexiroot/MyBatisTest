@@ -2,6 +2,8 @@ package com.mybatisTest.Test;
 
 import com.mybatisTest.dao.UserDao;
 
+
+import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
