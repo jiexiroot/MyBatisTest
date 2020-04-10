@@ -27,7 +27,6 @@ public interface UserDao {
      * @return	true 代表用户登录名在数据库中没有重复，注册成功	false 代表用户登录名在数据库中存在，注册失败
      */
     boolean doRegister(String name, String password, String nickname, String address, String phone, String mail);
-
     /**
      * 用来通过输入列名与所要模糊查找的属性值，来对users表模糊查找
      * @param columnName    列名
@@ -35,4 +34,6 @@ public interface UserDao {
      * @return  返回模糊查找后包含所要的查询的user对象
      */
     List<User> selectByFuzzy(String columnName,String columnValue);
+
+    boolean editByColumn(String columnName,String originalValue,String modifiedValue);
 }

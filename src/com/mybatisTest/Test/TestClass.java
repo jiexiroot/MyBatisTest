@@ -60,4 +60,21 @@ public class TestClass {
             System.out.println(user);
         }
     }
+
+    @org.junit.Test
+    public void editColumn(){
+        System.out.println("请输入列名：");
+        String columnName=inputScanner.next();
+        System.out.println("请输入原先的值");
+        String originalValue=inputScanner.next();
+        System.out.println("请输入修改的值");
+        String modifiedValue=inputScanner.next();
+         if(userDAO.editByColumn(columnName,originalValue,modifiedValue)){
+             System.out.println("修改成功！");
+         }
+         else{
+             System.out.println("修改失败，未找到原先的值或是错误的列名，");
+         }
+
+    }
 }

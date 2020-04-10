@@ -24,6 +24,17 @@ public interface UsersMapper {
      * @param dataMap map对象由{"user",user}与{"result",resultId}组成
      */
     void doRegister(Map<String,Object> dataMap);
-
+    /**
+     * 用来模糊查找的代理类方法
+     * @param properties 列名与Value值存在Properties中
+     * @return 返回查询到的User的List对象
+     */
     List<User> selectByFuzzy(Properties properties);
+
+    /**
+     * 用来修改指定列的值的代理类方法
+     * @param properties 列名，原先值originalValue，修改值modifiedValue
+     * @return 返回数据库中所受影响的行数
+     */
+    int editByColumn(Properties properties);
 }

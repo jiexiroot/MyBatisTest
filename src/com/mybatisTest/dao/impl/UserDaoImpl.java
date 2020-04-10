@@ -57,4 +57,16 @@ public class UserDaoImpl implements UserDao {
         sqlSession.close();
         return list;
     }
+
+    @Override
+    public boolean editByColumn(String columnName, String originalValue, String modifiedValue) {
+        UsersMapper usersMapper=sqlSession.getMapper(UsersMapper.class);
+        Properties properties=new Properties();
+        properties.setProperty("columnName",columnName);
+        properties.setProperty("originalValue",originalValue);
+        properties.setProperty("modifiedValue",modifiedValue);
+        int result=usersMapper.editByColumn(properties);
+        sqlSession.commit();
+        return result!=0?true:false;
+    }
 }

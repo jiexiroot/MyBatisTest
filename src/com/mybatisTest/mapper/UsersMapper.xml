@@ -19,4 +19,7 @@
     <select id="selectByFuzzy" resultType="com.mybatisTest.pojo.User">
         select * from users where ${columnName} like concat('%',#{columnValue},'%')
     </select>
+    <update id="editByColumn">
+        update users set ${columnName}=#{modifiedValue} where  ${columnName}=#{originalValue}
+    </update>
 </mapper>
