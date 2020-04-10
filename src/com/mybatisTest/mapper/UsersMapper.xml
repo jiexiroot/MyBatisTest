@@ -16,7 +16,7 @@
              #{user.mail,mode=IN,jdbcType=VARCHAR},
              #{flag,mode=OUT,jdbcType=INTEGER})}
     </select>
-    <select id="selectByFuzzy" >
+    <select id="selectByFuzzy" resultType="com.mybatisTest.pojo.User">
         select * from users where ${columnName} like concat('%',#{columnValue},'%')
     </select>
 </mapper>
