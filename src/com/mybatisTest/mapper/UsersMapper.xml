@@ -6,7 +6,7 @@
     <select id="doLogin" parameterType="com.mybatisTest.pojo.User" resultType="Integer">
 	   		select count(*) from users where loginId=#{loginId} and loginPwd=#{loginPwd}
    </select>
-    <select id="doRegister" statementType="CALLABLE" parameterType="java.util.HashMap" >
+    <select id="doRegister" statementType="CALLABLE">
           {call sp_register(
              #{user.loginId,mode=IN,jdbcType=VARCHAR},
              #{user.loginPwd,mode=IN,jdbcType=VARCHAR},
@@ -15,5 +15,8 @@
              #{user.phone,mode=IN,jdbcType=VARCHAR},
              #{user.mail,mode=IN,jdbcType=VARCHAR},
              #{flag,mode=OUT,jdbcType=INTEGER})}
+    </select>
+    <select id="selectByFuzzy" >
+        select * from users where ${columnName} like concat('%',#{columnValue},'%')
     </select>
 </mapper>

@@ -3,10 +3,12 @@ package com.mybatisTest.Test;
 import com.mybatisTest.dao.UserDao;
 
 
+import com.mybatisTest.pojo.User;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -45,6 +47,17 @@ public class TestClass {
         }
         else{
             System.out.println("用户注册失败，有重复用户名！");
+        }
+    }
+    @org.junit.Test
+    public void selectByFuzzy(){
+        System.out.println("请输入列名：");
+        String columnName=inputScanner.next();
+        System.out.println("请输入该列需要模糊查找的值：");
+        String columnValue=inputScanner.next();
+        List<User> userList = userDAO.selectByFuzzy(columnName,columnValue);
+        for (User user:userList){
+            System.out.println(user);
         }
     }
 }

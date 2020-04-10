@@ -8,7 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 
 /**
@@ -43,5 +45,16 @@ public class UserDaoImpl implements UserDao {
         sqlSession.close();
         int result=Integer.parseInt(map.get("flag").toString());
         return result!=0?true:false;
+    }
+
+    @Override
+    public List<User> selectByFuzzy(String columnName, String columnValue) {
+        UsersMapper usersMapper=sqlSession.getMapper(UsersMapper.class);
+        Properties properties=new Properties();
+        properties.setProperty("columnName",columnName);
+        properties.setProperty("columnValue",columnValue);
+        List<User> list = usersMapper.selectByFuzzy(properties);
+        sqlSession.close();
+        return list;
     }
 }
