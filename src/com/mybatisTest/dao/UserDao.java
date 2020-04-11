@@ -35,5 +35,12 @@ public interface UserDao {
      */
     List<User> selectByFuzzy(String columnName,String columnValue);
 
+    /**
+     * 修改列值
+     * @param columnName        列名
+     * @param originalValue     原先值
+     * @param modifiedValue     修改值
+     * @return  true 代表修改成功 false 代表修改失败
+     */
     boolean editByColumn(String columnName,String originalValue,String modifiedValue);
 }
