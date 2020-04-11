@@ -19,6 +19,35 @@ public class TestClass {
     ApplicationContext context=new ClassPathXmlApplicationContext("com/mybatisTest/applicationContext.xml");
     UserDao userDAO=(UserDao) context.getBean("userDao");
     Scanner inputScanner=new Scanner(System.in);
+    @Test
+    public void domain(){
+        System.out.println("请输入你所要操作的参数\n1.登录系统2.注册用户3.模糊查找列名的值4.修改列值");
+        int chooseId=0;
+        try {
+            chooseId=Integer.parseInt(inputScanner.next());
+        } catch (NumberFormatException e) {
+            System.err.println("错误的输入参数，请检查");
+            domain();
+        }
+        switch (chooseId){
+            case 1:
+                login();
+                break;
+            case 2:
+                register();
+                break;
+            case 3:
+                selectByFuzzy();
+                break;
+            case 4:
+                editColumn();
+                break;
+            default:
+                System.err.println("错误的输入参数，请检查");
+                domain();
+        }
+    }
+
     @org.junit.Test
     public void login(){
         System.out.println("请输入用户名：");
@@ -63,8 +92,17 @@ public class TestClass {
 
     @org.junit.Test
     public void editColumn(){
-        System.out.println("请输入列名：");
-        String columnName=inputScanner.next();
+        String columnName="";
+        while(true){
+            System.out.println("请输入列名：");
+            columnName=inputScanner.next();
+            if("LoginId".equals(columnName) || "LoginPwd".equals(columnName) || "Name".equals(columnName) ||
+                "Address".equals(columnName) || "Phone".equals(columnName) || "Mail".equals(columnName)){
+                break;
+            }else{
+                System.out.println("输入错误的列名，重新输入");
+            }
+        }
         System.out.println("请输入原先的值");
         String originalValue=inputScanner.next();
         System.out.println("请输入修改的值");
@@ -73,7 +111,7 @@ public class TestClass {
              System.out.println("修改成功！");
          }
          else{
-             System.out.println("修改失败，未找到原先的值或是错误的列名，");
+             System.out.println("修改失败，未找到原先的值！");
          }
 
     }
