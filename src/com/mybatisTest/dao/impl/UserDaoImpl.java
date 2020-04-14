@@ -69,4 +69,19 @@ public class UserDaoImpl implements UserDao {
         sqlSession.commit();
         return result!=0?true:false;
     }
+
+    @Override
+    public List<User> doSelectLoginId(String LoginId) {
+        UsersMapper usersMapper=sqlSession.getMapper(UsersMapper.class);
+        return usersMapper.doSelectBySQL(LoginId);
+    }
+
+    @Override
+    public boolean doLoginByCall(String loginId, String loginPwd) {
+        UsersMapper usersMapper=sqlSession.getMapper(UsersMapper.class);
+        User user=new User();
+        user.setLoginId(loginId);
+        user.setLoginPwd(loginPwd);
+        return usersMapper.doLoginByCall(user)!=0?true:false;
+    }
 }

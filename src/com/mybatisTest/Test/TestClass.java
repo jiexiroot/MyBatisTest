@@ -115,4 +115,26 @@ public class TestClass {
          }
 
     }
+    @Test
+    public void sqlSelect(){
+        System.out.println("请输入所要查询的LoginId值");
+        String queryValue=inputScanner.nextLine();
+        List<User> userList = userDAO.doSelectLoginId(queryValue);
+        for (User user:userList){
+            System.out.println(user);
+        }
+    }
+    @Test
+    public void callLogin(){
+        System.out.println("请输入用户名：");
+        String loginId=inputScanner.next();
+        System.out.println("请输入密码：");
+        String loginPwd=inputScanner.next();
+        if(userDAO.doLoginByCall(loginId, loginPwd)){
+            System.out.println("用户登录成功！");
+        }
+        else{
+            System.out.println("用户登录失败！");
+        }
+    }
 }

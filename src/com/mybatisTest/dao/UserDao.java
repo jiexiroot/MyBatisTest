@@ -43,4 +43,17 @@ public interface UserDao {
      * @return  true 代表修改成功 false 代表修改失败
      */
     boolean editByColumn(String columnName,String originalValue,String modifiedValue);
+    /**
+     * 通过Sql注入实现查询到所有用户信息
+     * @param LoginId 查询值
+     * @return Sql注入所查询到的User列表
+     */
+    List<User> doSelectLoginId(String LoginId);
+    /**
+     * 用户登录方法，通过call来调用
+     * @param loginId 用户登录名
+     * @param loginPwd 密码
+     * @return true 代表登录成功  false代表登录失败
+     */
+    boolean doLoginByCall(String loginId, String loginPwd);
 }

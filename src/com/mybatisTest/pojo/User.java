@@ -1,10 +1,14 @@
 package com.mybatisTest.pojo;
+
+import org.apache.ibatis.type.Alias;
+
 /**
  * POJO类，和数据库中的Users表对应
  * POJO类，和数据库中表的字段一致（类型，名称首字母小写，采用小驼峰的形式）
  * @author GOU
  *
  */
+@Alias(value="user")
 public class User {
     private int id;
     private String loginId;

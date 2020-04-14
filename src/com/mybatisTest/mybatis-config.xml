@@ -8,6 +8,10 @@
         <!-- 设置日志系统为LOG4J -->
         <setting name="logImpl" value="LOG4J"></setting>
     </settings>
+    <!--使用自动扫描包来定义别名-->
+    <typeAliases>
+        <package name="com.mybatisTest.pojo"/>
+    </typeAliases>
     <!--配置环境-->
     <environments default="mysql">
         <environment id="mysql">
@@ -26,4 +30,5 @@
     <mappers>
         <mapper resource="com/mybatisTest/mapper/UsersMapper.xml"/>
     </mappers>
+
 </configuration>

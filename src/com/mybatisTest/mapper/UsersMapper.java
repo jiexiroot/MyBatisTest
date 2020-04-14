@@ -3,6 +3,7 @@ package com.mybatisTest.mapper;
 
 
 import com.mybatisTest.pojo.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -37,4 +38,18 @@ public interface UsersMapper {
      * @return 返回数据库中所受影响的行数
      */
     int editByColumn(Properties properties);
+
+    /**
+     *通过Sql注入实现查询到所有用户信息
+     * @param LoginId 查询值
+     * @return Sql注入所查询到的User列表
+     */
+    List<User> doSelectBySQL(@Param("searchValue") String LoginId);
+
+    /**
+     * 通过Call函数调用来实现登录功能
+     * @param user 通过自动映射将用户名与密码注入到User对象中
+     * @return  1为登录成功 0为登录失败
+     */
+    int doLoginByCall(User user);
 }
