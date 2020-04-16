@@ -18,11 +18,14 @@
              #{flag,mode=OUT,jdbcType=INTEGER})}
     </select>
     <select id="selectByFuzzy" resultType="user">
-        select * from users where ${columnName} like concat('%',#{columnValue},'%')
+        select <include refid="usersColumns"/> from users where ${columnName} like concat('%',#{columnValue},'%')
     </select>
     <update id="editByColumn">
         update users set ${columnName}=#{modifiedValue} where  ${columnName}=#{originalValue}
     </update>
+    <sql id="usersColumns">
+        loginId,name,address,phone,mail
+    </sql>
     <select id="doSelectBySQL" resultType="com.mybatisTest.pojo.User">
         select * from users where LoginId=${searchValue};
     </select>

@@ -29,6 +29,7 @@
     <!-- 配置mapper的位置 -->
     <mappers>
         <mapper resource="com/mybatisTest/mapper/UsersMapper.xml"/>
+        <mapper resource="com/mybatisTest/mapper/TusersMapper.xml"/>
     </mappers>
 
 </configuration>

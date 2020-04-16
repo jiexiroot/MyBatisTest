@@ -1,0 +1,12 @@
+create table t_user(
+	t_id int primary key auto_increment,
+	t_name VARCHAR(50),
+	t_age int
+);
+
+insert into t_user(t_name,tage) values ('gou',20);
+insert into t_user(t_name,tage) values ('li',19);
+insert into t_user(t_name,tage) values ('chen',21);
+insert into t_user(t_name,tage) values ('pan',20);
+insert into t_user(t_name,tage) values ('tang',20);
+insert into t_user(t_name,tage) values ('ying',20);

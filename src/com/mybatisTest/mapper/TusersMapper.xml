@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mybatisTest.mapper.TusersMapper">
+    <!--使用resultMap中的有参构造方法-->
+    <resultMap id="rMap" type="tuser">
+        <constructor>
+            <idArg column="t_id"  javaType="int"  />
+            <arg column="t_name" javaType="String" />
+            <arg column="t_age" javaType="int"  />
+        </constructor>
+    </resultMap>
+    <!--使用resultMap解决类的属性和列名不一致的情况-->
+    <resultMap id="rMap2" type="tuser">
+        <id property="tId" column="t_id"  javaType="int" jdbcType="INTEGER"/>
+        <result property="tName" column="t_name" javaType="String" jdbcType="VARCHAR"/>
+        <result property="tAge" column="t_age" javaType="int" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="selectAll" resultMap="rMap">
+        select * from t_user;
+    </select>
+</mapper>
