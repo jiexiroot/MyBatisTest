@@ -84,4 +84,10 @@ public class UserDaoImpl implements UserDao {
         user.setLoginPwd(loginPwd);
         return usersMapper.doLoginByCall(user)!=0?true:false;
     }
+
+    @Override
+    public List<User> selectByIf(User user) {
+        UsersMapper usersMapper=sqlSession.getMapper(UsersMapper.class);
+        return usersMapper.queryByif(user);
+    }
 }

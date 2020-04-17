@@ -51,9 +51,11 @@ public class TestClass {
     @org.junit.Test
     public void login(){
         System.out.println("请输入用户名：");
-        String loginId=inputScanner.next();
+        //提取上方next()中留下的‘\n’，清空输入框
+        inputScanner.nextLine();
+        String loginId=inputScanner.nextLine();
         System.out.println("请输入密码：");
-        String loginPwd=inputScanner.next();
+        String loginPwd=inputScanner.nextLine();
         if(userDAO.doLogin(loginId, loginPwd)){
             System.out.println("用户登录成功！");
         }

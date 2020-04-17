@@ -56,4 +56,10 @@ public interface UserDao {
      * @return true 代表登录成功  false代表登录失败
      */
     boolean doLoginByCall(String loginId, String loginPwd);
+    /**
+     * 查询通过if标签实现
+     * @param user 用户输入的值
+     * @return 返回查询条件查询到的文件
+     */
+    List<User> selectByIf(User user);
 }

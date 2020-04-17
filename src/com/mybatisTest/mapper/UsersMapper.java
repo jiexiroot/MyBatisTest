@@ -52,4 +52,11 @@ public interface UsersMapper {
      * @return  1为登录成功 0为登录失败
      */
     int doLoginByCall(User user);
+    /**
+     * 查询通过if标签实现
+     * @param user 用户输入的值
+     * @return 返回查询条件查询到的文件
+     */
+    List<User> queryByif(User user);
+
 }

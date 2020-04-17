@@ -4,7 +4,18 @@
 <mapper namespace="com.mybatisTest.mapper.UsersMapper">
     <!-- 配置映射的SQL语句 -->
     <select id="doLogin" parameterType="user" resultType="Integer">
-	   		select count(*) from users where loginId=#{loginId} and loginPwd=#{loginPwd}
+	   		select count(*) from users where
+	   		<choose>
+	   		    <when test="loginId!=null and loginId!=''">
+                    loginId=#{loginId}
+                </when>
+                <when test="loginPwd!=null and loginPwd!=''">
+                    loginPwd=#{loginPwd}
+                </when>
+                <otherwise>
+                    1=1
+                </otherwise>
+            </choose>
    </select>
 
     <select id="doRegister" statementType="CALLABLE">
@@ -27,11 +38,37 @@
         loginId,name,address,phone,mail
     </sql>
     <select id="doSelectBySQL" resultType="com.mybatisTest.pojo.User">
-        select * from users where LoginId=${searchValue};
+        select * from users where 1=1
+        <if test="searchValue !=null and searchValue!=''">
+           and LoginId=#{searchValue}
+        </if>
     </select>
     <select id="doLoginByCall" resultType="java.lang.Integer" statementType="CALLABLE">
         {call sp_login(
         #{loginId,mode=IN,jdbcType=VARCHAR},
         #{loginPwd,mode=IN,jdbcType=VARCHAR})}
     </select>
+
+    <select id="queryByif" resultType="com.mybatisTest.pojo.User">
+        select * from users where 1=1
+        <if test="loginId !=null and loginId!=''">
+            and LoginId like concat('%',#{loginId},'%')
+        </if>
+        <if test="loginPwd !=null and loginPwd!=''">
+            and LoginPwd like concat('%',#{loginPwd},'%')
+        </if>
+        <if test="name !=null and name!=''">
+            and Name like concat('%',#{name},'%')
+        </if>
+        <if test="address !=null and address!=''">
+            and Address like concat('%',#{address},'%')
+        </if>
+        <if test="phone !=null and phone!=''">
+            and Phone like concat('%',#{phone},'%')
+        </if>
+        <if test="mail !=null and mail!=''">
+            and Mail like concat('%',#{mail},'%')
+        </if>
+    </select>
+
 </mapper>
