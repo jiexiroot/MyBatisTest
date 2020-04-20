@@ -31,21 +31,18 @@ public interface UsersMapper {
      * @return 返回查询到的User的List对象
      */
     List<User> selectByFuzzy(Properties properties);
-
     /**
      * 用来修改指定列的值的代理类方法
      * @param properties 列名，原先值originalValue，修改值modifiedValue
      * @return 返回数据库中所受影响的行数
      */
     int editByColumn(Properties properties);
-
     /**
      *通过Sql注入实现查询到所有用户信息
      * @param LoginId 查询值
      * @return Sql注入所查询到的User列表
      */
     List<User> doSelectBySQL(@Param("searchValue") String LoginId);
-
     /**
      * 通过Call函数调用来实现登录功能
      * @param user 通过自动映射将用户名与密码注入到User对象中
@@ -58,5 +55,10 @@ public interface UsersMapper {
      * @return 返回查询条件查询到的文件
      */
     List<User> queryByif(User user);
-
+    /**
+     * 通过where标签与choose标签来混合使用实现注册
+     * @param user  注册所需要的参数
+     * @return 1为注册成功 0为注册失败
+     */
+    int registerByWhere(User user);
 }

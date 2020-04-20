@@ -1,9 +1,13 @@
 package com.mybatisTest.pojo;
 
+import org.apache.ibatis.type.Alias;
+import org.springframework.beans.factory.annotation.Value;
+
 /**
  * @author GOU
  * @Date 2020-04-16 15:43
  */
+@Alias(value="tuser")
 public class Tuser {
     private int tId;
     private String tName;

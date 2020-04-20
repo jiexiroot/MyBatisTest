@@ -40,6 +40,18 @@ public class User {
         this.phone = phone;
         this.mail = mail;
     }
+
+    public User(String loginId, String loginPwd, String name, String address, String phone, String mail, int userRoleId, int userStateId) {
+        this.loginId = loginId;
+        this.loginPwd = loginPwd;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.mail = mail;
+        this.userRoleId = userRoleId;
+        this.userStateId = userStateId;
+    }
+
     public User() {
         super();
         // TODO Auto-generated constructor stub

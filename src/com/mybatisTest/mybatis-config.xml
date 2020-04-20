@@ -30,6 +30,7 @@
     <mappers>
         <mapper resource="com/mybatisTest/mapper/UsersMapper.xml"/>
         <mapper resource="com/mybatisTest/mapper/TusersMapper.xml"/>
+        <mapper resource="com/mybatisTest/mapper/BookMapper.xml"/>
     </mappers>
 
 </configuration>

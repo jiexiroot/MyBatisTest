@@ -2,6 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mybatisTest.mapper.UsersMapper">
+    <insert id="registerByWhere">
+        insert into users(LoginId,LoginPwd,Name,Address,Phone,Mail,UserRoleId,UserStateId) values
+         (#{loginId},#{loginPwd},#{name},#{address},#{phone},#{mail}
+         <trim prefix="," prefixOverrides=",">
+             <choose>
+                <when test="userRoleId!=null  and userRoleId==0">
+                    1,
+                </when>
+                <when test="userRoleId!=null  and userRoleId!=0">
+                    #{userRoleId},
+                </when>
+             </choose>
+             <choose>
+                 <when test="userStateId!=null  and userStateId==0">
+                     1
+                 </when>
+                 <when test="userStateId!=null  and userStateId!=0">
+                     #{userStateId}
+                 </when>
+             </choose>
+         </trim>
+         );
+    </insert>
     <!-- 配置映射的SQL语句 -->
     <select id="doLogin" parameterType="user" resultType="Integer">
 	   		select count(*) from users where
@@ -50,25 +73,27 @@
     </select>
 
     <select id="queryByif" resultType="com.mybatisTest.pojo.User">
-        select * from users where 1=1
-        <if test="loginId !=null and loginId!=''">
-            and LoginId like concat('%',#{loginId},'%')
-        </if>
-        <if test="loginPwd !=null and loginPwd!=''">
-            and LoginPwd like concat('%',#{loginPwd},'%')
-        </if>
-        <if test="name !=null and name!=''">
-            and Name like concat('%',#{name},'%')
-        </if>
-        <if test="address !=null and address!=''">
-            and Address like concat('%',#{address},'%')
-        </if>
-        <if test="phone !=null and phone!=''">
-            and Phone like concat('%',#{phone},'%')
-        </if>
-        <if test="mail !=null and mail!=''">
-            and Mail like concat('%',#{mail},'%')
-        </if>
+        select * from users
+        <where>
+            <if test="loginId !=null and loginId!=''">
+                and LoginId like concat('%',#{loginId},'%')
+            </if>
+            <if test="loginPwd !=null and loginPwd!=''">
+                and LoginPwd like concat('%',#{loginPwd},'%')
+            </if>
+            <if test="name !=null and name!=''">
+                and Name like concat('%',#{name},'%')
+            </if>
+            <if test="address !=null and address!=''">
+                and Address like concat('%',#{address},'%')
+            </if>
+            <if test="phone !=null and phone!=''">
+                and Phone like concat('%',#{phone},'%')
+            </if>
+            <if test="mail !=null and mail!=''">
+                and Mail like concat('%',#{mail},'%')
+            </if>
+        </where>
     </select>
 
 </mapper>

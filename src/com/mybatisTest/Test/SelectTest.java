@@ -20,8 +20,8 @@ public class SelectTest {
     @Test
     public void select(){
         System.out.println("请输入你所要操作的参数用‘-’分隔\n1.通过LoginId查询2.通过LoginPwd查询3.通过Name查询4.通过Address查询5.通过Phone查询6.通过Mail查询");
-        String chooseID=inputScanner.next();
-        String optionGrouping[]=chooseID.split("-");
+        String chooseId =inputScanner.next();
+        String[] optionGrouping =chooseId .split("-");
         User user=new User();
         for (String s:optionGrouping) {
             switch (s) {
@@ -55,12 +55,39 @@ public class SelectTest {
                     String mail = inputScanner.next();
                     user.setMail(mail);
                     break;
-
+                default:
+                    break;
             }
         }
         List<User> list=userDAO.selectByIf(user);
         for(User us:list){
             System.out.println(us);
         }
+    }
+    @Test
+    public void register(){
+        System.out.println("请输入用户名：");
+        String loginId=inputScanner.next();
+        System.out.println("请输入密码：");
+        String loginPwd=inputScanner.next();
+        System.out.println("请输入昵称");
+        String nickname=inputScanner.next();
+        System.out.println("请输入地址");
+        String address=inputScanner.next();
+        System.out.println("请输入电话号码");
+        String phone=inputScanner.next();
+        System.out.println("请输入用户角色Id");
+        String UserRoleId=inputScanner.next();
+        System.out.println("请输入用户是否有效Id");
+        String UserStateId=inputScanner.next();
+        User user=new User(loginId,loginPwd,nickname,address,phone,"",Integer.parseInt(UserRoleId),Integer.parseInt(UserStateId));
+        System.out.println(user);
+        if(userDAO.registerByWhere(user)){
+            System.out.println("用户注册成功！");
+        }
+        else{
+            System.out.println("用户注册失败，有重复用户名！");
+        }
+
     }
 }

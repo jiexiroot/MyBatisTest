@@ -24,6 +24,7 @@ public class UserDaoImpl implements UserDao {
      * 得到SqlSession
      */
     SqlSession sqlSession= MyBaitsUtils.getSession();
+    UsersMapper usersMapper=sqlSession.getMapper(UsersMapper.class);
     @Override
     public boolean doLogin(String loginId, String loginPwd) {
         User user=new User();
@@ -39,7 +40,6 @@ public class UserDaoImpl implements UserDao {
         User user=new User(name,password,nickname,address,phone,mail);
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("user",user);
-        UsersMapper usersMapper=sqlSession.getMapper(UsersMapper.class);
         usersMapper.doRegister(map);
         sqlSession.commit();
         sqlSession.close();
@@ -49,7 +49,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> selectByFuzzy(String columnName, String columnValue) {
-        UsersMapper usersMapper=sqlSession.getMapper(UsersMapper.class);
         Properties properties=new Properties();
         properties.setProperty("columnName",columnName);
         properties.setProperty("columnValue",columnValue);
@@ -60,7 +59,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean editByColumn(String columnName, String originalValue, String modifiedValue) {
-        UsersMapper usersMapper=sqlSession.getMapper(UsersMapper.class);
         Properties properties=new Properties();
         properties.setProperty("columnName",columnName);
         properties.setProperty("originalValue",originalValue);
@@ -72,13 +70,11 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> doSelectLoginId(String LoginId) {
-        UsersMapper usersMapper=sqlSession.getMapper(UsersMapper.class);
         return usersMapper.doSelectBySQL(LoginId);
     }
 
     @Override
     public boolean doLoginByCall(String loginId, String loginPwd) {
-        UsersMapper usersMapper=sqlSession.getMapper(UsersMapper.class);
         User user=new User();
         user.setLoginId(loginId);
         user.setLoginPwd(loginPwd);
@@ -87,7 +83,12 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> selectByIf(User user) {
-        UsersMapper usersMapper=sqlSession.getMapper(UsersMapper.class);
         return usersMapper.queryByif(user);
+    }
+
+    @Override
+    public boolean registerByWhere(User user) {
+        usersMapper.registerByWhere(user);
+        return true;
     }
 }

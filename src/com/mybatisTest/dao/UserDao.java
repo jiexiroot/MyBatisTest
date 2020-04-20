@@ -62,4 +62,10 @@ public interface UserDao {
      * @return 返回查询条件查询到的文件
      */
     List<User> selectByIf(User user);
+    /**
+     * 通过where标签与choose标签来混合使用实现注册
+     * @param user  注册所需要的参数
+     * @return true为注册成功 false为注册失败
+     */
+    boolean registerByWhere(User user);
 }
