@@ -21,11 +21,21 @@ public class BookTest {
     @Test
     public void selectByCid(){
         List<Long> cid=new ArrayList<Long>();
-        cid.add((long) 35);
+        cid.add((long) 15);
         cid.add((long) 2);
         List<Books> booksList=bookDao.selectByCategoryId(cid);
         for (Books book:booksList) {
             System.out.println(book);
         }
+    }
+    @Test
+    public void findBookByid1(){
+        Books books=bookDao.findBookById(4950);
+        System.out.println(books);
+    }
+    @Test
+    public void findBookByid2(){
+        Books books=bookDao.findBookById(4950);
+        System.out.println(books);
     }
 }

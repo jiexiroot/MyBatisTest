@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mybatisTest.mapper.CategoriesMapper">
+    <!--方法1:嵌套查询的方式实现按照种类的id ,查询种类信息及种类下的图书信息-->
+    <select id="findCategoriesByCategoryId" resultMap="result1">
+        select * from Categories where id=#{id}
+    </select>
+    <resultMap id="result1" type="categories">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <collection property="bookList" column="id" ofType="books"
+                    select="com.mybatisTest.mapper.BookMapper.findBookByCategoryId"/>
+    </resultMap>
+    <!--方法2:嵌套结果的方式实现按照种类的id ,查询种类信息及种类下的图书信息-->
+    <select id="findCategoriesByCategoryId2" resultMap="result2">
+        select c.*,b.id as bId,b.title,b.author,b.unitPrice from Categories as c,Books as b
+        where c.id=#{id} and c.id=b.categoryId
+    </select>
+    <resultMap id="result2" type="categories">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <collection property="bookList" ofType="books">
+            <id property="id" column="bId"/>
+            <result property="title" column="title"/>
+            <result property="author" column="author"/>
+            <result property="unitPrice" column="unitPrice"/>
+        </collection>
+    </resultMap>
+
+    <select id="findCategoriesById" resultType="categories">
+        select * from Categories where id=#{id};
+    </select>
+</mapper>

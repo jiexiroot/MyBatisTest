@@ -13,4 +13,37 @@
             </if>
         </where>
     </select>
+    <sql id="chooseRow">
+        id,title,author,unitPrice
+    </sql>
+    <select id="findBookByCategoryId" resultType="books">
+        select <include refid="chooseRow"/> from books where CategoryId=#{cid}
+    </select>
+    <!--方法1：用嵌套结果的方式按照图书的ID查询图书信息-->
+    <select id="findBookById" resultMap="result">
+        select b.id,b. title, b. author, b. unitprice, c. name,b. categoryId
+        from books as b, categories as c where b.id=#{id} and b. categoryId=c. id
+    </select>
+    <resultMap id="result" type="books">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="author" column="author"/>
+        <result property="unitPrice" column="unitPrice"/>
+        <association property="categories" javaType="categories">
+            <id property="id" column="categoryId"/>
+            <result property="name" column="name"/>
+        </association>
+    </resultMap>
+    <!--方法2：用嵌套语句查询的方式按照图书的ID查询图书信息-->
+    <select id="findBookById2" resultType="com.mybatisTest.pojo.Books">
+        select * from books where  id=#{id}
+    </select>
+    <resultMap id="result2" type="books">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="author" column="author"/>
+        <result property="unitPrice" column="unitPrice"/>
+        <association property="categories" javaType="categories" column="id"
+                     select="com.mybatisTest.mapper.CategoriesMapper.findCategoriesById"/>
+    </resultMap>
 </mapper>

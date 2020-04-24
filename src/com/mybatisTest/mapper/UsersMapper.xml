@@ -57,6 +57,17 @@
     <update id="editByColumn">
         update users set ${columnName}=#{modifiedValue} where  ${columnName}=#{originalValue}
     </update>
+    <update id="updateByPassword">
+        update users
+        <set>
+            <if test="Oldpaword!=null || usname!=null">
+                loginPwd=#{Newpaword}
+                <where>
+                    loginPwd=#{Oldpaword} and loginId=#{usname}
+                </where>
+            </if>
+        </set>
+    </update>
     <sql id="usersColumns">
         loginId,name,address,phone,mail
     </sql>
@@ -73,10 +84,11 @@
     </select>
 
     <select id="queryByif" resultType="com.mybatisTest.pojo.User">
+        <bind name="loginId_pattern" value="'%'+loginId+'%'"/>
         select * from users
         <where>
             <if test="loginId !=null and loginId!=''">
-                and LoginId like concat('%',#{loginId},'%')
+                and LoginId like #{loginId_pattern}
             </if>
             <if test="loginPwd !=null and loginPwd!=''">
                 and LoginPwd like concat('%',#{loginPwd},'%')

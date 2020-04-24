@@ -61,4 +61,12 @@ public interface UsersMapper {
      * @return 1为注册成功 0为注册失败
      */
     int registerByWhere(User user);
+    /**
+     * 修改用户密码，使用SET标签
+     * @param username 用户名
+     * @param npassword 新密码
+     * @param opassword 旧密码
+     * @return 1为返回修改成功 0为返回修改失败
+     */
+    int updateByPassword(@Param("usname") String username,@Param("Newpaword") String npassword,@Param("Oldpaword") String opassword);
 }

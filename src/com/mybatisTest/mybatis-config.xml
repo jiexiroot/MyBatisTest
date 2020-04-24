@@ -20,6 +20,7 @@
             <!-- 配置数据库连接池 -->
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+<!--                &amp;useAffectedRows=true-->
                 <property name="url" value="jdbc:mysql://localhost:3306/mybookshop?useSSL=false&amp;serverTimezone=UTC"/>
                 <property name="username" value="gou"/>
                 <property name="password" value="088159"/>
@@ -28,9 +29,7 @@
     </environments>
     <!-- 配置mapper的位置 -->
     <mappers>
-        <mapper resource="com/mybatisTest/mapper/UsersMapper.xml"/>
-        <mapper resource="com/mybatisTest/mapper/TusersMapper.xml"/>
-        <mapper resource="com/mybatisTest/mapper/BookMapper.xml"/>
+        <package name="com.mybatisTest.mapper"/>
     </mappers>
 
 </configuration>

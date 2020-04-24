@@ -68,4 +68,13 @@ public interface UserDao {
      * @return true为注册成功 false为注册失败
      */
     boolean registerByWhere(User user);
+
+    /**
+     * 修改用户密码，使用SET标签
+     * @param username 用户名
+     * @param newPassword 新密码
+     * @param oldPassword 旧密码
+     * @return true为修改成功，false为修改失败
+   */
+    boolean updateByUser(String username,String newPassword,String oldPassword);
 }

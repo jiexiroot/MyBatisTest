@@ -80,6 +80,21 @@ public class TestClass {
             System.out.println("用户注册失败，有重复用户名！");
         }
     }
+    @Test
+    public void update(){
+        System.out.println("请输入用户名：");
+        String loginId=inputScanner.next();
+        System.out.println("请输入旧密码：");
+        String oldPassword=inputScanner.next();
+        System.out.println("请输入新密码");
+        String newPassword=inputScanner.next();
+        if(userDAO.updateByUser(loginId,newPassword,oldPassword)){
+            System.out.println("用户修改成功！");
+        }
+        else{
+            System.out.println("用户修改失败，错误用户名或秘密！");
+        }
+    }
     @org.junit.Test
     public void selectByFuzzy(){
         System.out.println("请输入列名：");

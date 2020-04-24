@@ -1,6 +1,7 @@
 package com.mybatisTest.dao;
 
 import com.mybatisTest.pojo.Books;
+import com.mybatisTest.pojo.Categories;
 
 import java.util.List;
 
@@ -16,4 +17,24 @@ public interface BookDao {
      * @return 图书信息
      */
     List<Books> selectByCategoryId(List<Long> categoriesId);
+    /**
+     * 根据图书种类的id,得到该种类包含的所有图书信息
+     * @param cid 图书种类的id
+     * @return 图书列表
+     */
+    List<Books> findBookByCategoryId(int cid);
+    /**
+     * 一对一 使用嵌套结果
+     * 按照图书的id查询这本书的信息
+     * @param id 图书ID
+     * @return 指定id的图书信息
+     */
+    Books findBookById(int id);
+    /**
+     * 一对一 使用嵌套查询语句
+     * 按照图书的id查询这本书的信息
+     * @param id 图书ID
+     * @return 指定id的图书信息
+     */
+    Books findBookById2(int id);
 }

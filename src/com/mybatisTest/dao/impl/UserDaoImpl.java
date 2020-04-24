@@ -91,4 +91,11 @@ public class UserDaoImpl implements UserDao {
         usersMapper.registerByWhere(user);
         return true;
     }
+
+    @Override
+    public boolean updateByUser(String username, String newPassword, String oldPassword) {
+        int i=usersMapper.updateByPassword(username, newPassword, oldPassword);
+        System.out.println("受影响的结果集为："+i);
+        return i==1?true:false;
+    }
 }
