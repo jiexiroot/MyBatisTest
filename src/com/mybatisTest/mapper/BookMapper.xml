@@ -35,7 +35,7 @@
         </association>
     </resultMap>
     <!--方法2：用嵌套语句查询的方式按照图书的ID查询图书信息-->
-    <select id="findBookById2" resultType="com.mybatisTest.pojo.Books">
+    <select id="findBookById2" resultMap="result2">
         select * from books where  id=#{id}
     </select>
     <resultMap id="result2" type="books">
